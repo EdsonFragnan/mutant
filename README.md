@@ -12,3 +12,31 @@ Aplicação rodando na rota da AWS.
 - npm run coverage (Testes + Coverage)
 - npm start (Rodar a Aplicação)
 - npm test (Apenas o teste do MochaJs)
+
+# Rotas
+
+- https://app-mutant.herokuapp.com/stats - GET
+- https://app-mutant.herokuapp.com/mutant - POST
+
+* Resposta "Forbidden"
+- Body
+{
+	"dna":["ATGCGA",
+          "CAGTGC",
+          "TTCCCT",
+          "AGAAGG",
+          "CCCCTA",
+          "TCACTG"]
+}
+* Resposta OK
+- Body
+{
+	"dna":["ATGCGA",
+          "CAGTGC",
+          "TTATGT",
+          "AGAAGG",
+          "CCCCTA",
+          "TCACTG"]
+}
+
+
