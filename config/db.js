@@ -5,7 +5,6 @@ module.exports = () => {
   mongoose.Promise = require('bluebird');
 
   let uristring = '',
-    mensagem = '',
     port = process.env.PORT || 3000;
     if (port === 3000) {
       uristring =
@@ -16,7 +15,7 @@ module.exports = () => {
       uristring =
         process.env.MONGOLAB_URI ||
         process.env.MONGOHQ_URL ||
-        'mongodb://heroku_0r11shnh:br123456@ds115533.mlab.com:15533/heroku_0r11shnh';
+        'mongodb://mutante:mutante123456@ds115533.mlab.com:15533/heroku_0r11shnh';
     }
   mongoose.connect(uristring, { useMongoClient: true }, (err, res) => {
     if (err) {
