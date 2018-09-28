@@ -28,7 +28,7 @@ Aplicação rodando na rota da AWS.
           "CCCCTA",
           "TCACTG"]
 }
-* Resposta OK
+* Resposta "OK"
 - Body
 {
 	"dna":["ATGCGA",
