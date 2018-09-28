@@ -3,7 +3,7 @@
 Aplicação rodando na rota da AWS.
 
 # Testes Unitários + Coverage
-- Observação - Para rodar os teste unitários, precisa subir um instância do mongoDB
+- Observação - Para rodar os teste unitários, precisa subir uma instância do mongoDB
 * Banco
 - use mutante
 * Collection
