@@ -5,14 +5,19 @@ module.exports = () => {
   mongoose.Promise = require('bluebird');
 
   let uristring = '',
-      mensagem = '',
-      port = process.env.PORT || 3000;
-  if (port === 3000) {
-    uristring =
-      process.env.MONGOLAB_URI ||
-      process.env.MONGOHQ_URL ||
-      'mongodb://127.0.0.1:27017/mutante';
-  } 
+    mensagem = '',
+    port = process.env.PORT || 3000;
+    if (port === 3000) {
+      uristring =
+        process.env.MONGOLAB_URI ||
+        process.env.MONGOHQ_URL ||
+        'mongodb://127.0.0.1:27017/mydb_pdv';
+    } else {
+      uristring =
+        process.env.MONGOLAB_URI ||
+        process.env.MONGOHQ_URL ||
+        'mongodb://mutant:Oi123456@ds115533.mlab.com:15533/heroku_0r11shnh';
+    }
   mongoose.connect(uristring, { useMongoClient: true }, (err, res) => {
     if (err) {
       console.log('Bad Connection: working in - ' + uristring + '. ' + err);
