@@ -1,0 +1,38 @@
+{
+  "name": "mutant",
+  "version": "1.0.0",
+  "description": "App de busca do dna X.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha ./test/**/*.test.js ",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha ./test/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdsonFragnan/mutant.git"
+  },
+  "author": "Edson Luiz Fragnan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EdsonFragnan/mutant/issues"
+  },
+  "homepage": "https://github.com/EdsonFragnan/mutant#readme",
+  "dependencies": {
+    "bluebird": "^3.5.2",
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "express": "^4.16.3",
+    "jwt-simple": "^0.2.0",
+    "logger": "0.0.1",
+    "mongoose": "^4.13.17",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "expect": "^23.6.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "request": "^2.88.0",
+    "should": "^13.2.3"
+  }
+}

@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for mutant/controllers/mutante_post.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">mutant/controllers/</a> mutante_post.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">1.41% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>1/71</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">1.43% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/70</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+module.exports.isMutante = (dna_humano, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >  const mutante_model = require('../models/mutante.js');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const seq = {</span>
+    seq_a: 'AAAA',
+    seq_c: 'CCCC',
+    seq_g: 'GGGG',
+    seq_t: 'TTTT'
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const insert_mutante = (dna, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    mutante_model.postMutante(dna, res, (data) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (dna === false) {</span>
+<span class="cstat-no" title="statement not covered" >        res.status(403);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        res.json();</span>
+      }
+    });
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const verificaArray = (dna, seq) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    let mutante = false;</span>
+<span class="cstat-no" title="statement not covered" >    for(let i in dna) {</span>
+<span class="cstat-no" title="statement not covered" >      let _dna = dna[i],</span>
+      new_seq_a = new RegExp(seq.seq_a),
+      new_seq_c = new RegExp(seq.seq_c),
+      new_seq_g = new RegExp(seq.seq_g),
+      new_seq_t = new RegExp(seq.seq_t);
+<span class="cstat-no" title="statement not covered" >      if (new_seq_a.test(_dna) === true ||</span>
+          new_seq_c.test(_dna) === true ||
+          new_seq_g.test(_dna) === true ||
+          new_seq_t.test(_dna) === true) {
+<span class="cstat-no" title="statement not covered" >            mutante = true;</span>
+          }     
+    }
+<span class="cstat-no" title="statement not covered" >    return mutante;</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const montarMatriz = (dna) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const convertida = dna.map(<span class="fstat-no" title="function not covered" >function(obj) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return Object.keys(obj).map(<span class="fstat-no" title="function not covered" >function(chave) {</span></span>
+<span class="cstat-no" title="statement not covered" >          return obj[chave];</span>
+      });
+    });
+<span class="cstat-no" title="statement not covered" >    return convertida;</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const montarResposta = (mutante, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    let arrayFinal = [];</span>
+<span class="cstat-no" title="statement not covered" >    for (let i in mutante) {</span>
+<span class="cstat-no" title="statement not covered" >      if (mutante[i] === true) {</span>
+<span class="cstat-no" title="statement not covered" >        arrayFinal.push(mutante);</span>
+      }
+    }
+<span class="cstat-no" title="statement not covered" >    if(arrayFinal.length &gt;= 2) {</span>
+<span class="cstat-no" title="statement not covered" >      insert_mutante(true, res);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      insert_mutante(false, res);</span>
+    }
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const montarArrayDiagonal = (dna) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    let Ylength = dna.length;</span>
+<span class="cstat-no" title="statement not covered" >    let Xlength = dna[0].length;</span>
+<span class="cstat-no" title="statement not covered" >    let maxLength = Math.max(Xlength, Ylength);</span>
+<span class="cstat-no" title="statement not covered" >    let temp;</span>
+<span class="cstat-no" title="statement not covered" >    let valor = [];</span>
+<span class="cstat-no" title="statement not covered" >    for (let k = 0; k &lt;= 2 * (maxLength - 1); ++k) {</span>
+<span class="cstat-no" title="statement not covered" >        temp = [];</span>
+<span class="cstat-no" title="statement not covered" >        for (let y = Ylength - 1; y &gt;= 0; --y) {</span>
+<span class="cstat-no" title="statement not covered" >            let x = k - y;</span>
+<span class="cstat-no" title="statement not covered" >            if (x &gt;= 0 &amp;&amp; x &lt; Xlength) {</span>
+<span class="cstat-no" title="statement not covered" >                temp.push(dna[y][x]);</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        if(temp.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            valor.push(temp.join(''));</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    return valor;</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const verificaDiagonal = (dna, seq, mutante, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    let valDiagonal = montarArrayDiagonal(dna);</span>
+<span class="cstat-no" title="statement not covered" >    let valDiagonalFinal = verificaArray(valDiagonal, seq);</span>
+<span class="cstat-no" title="statement not covered" >    mutante.push(valDiagonalFinal);</span>
+<span class="cstat-no" title="statement not covered" >    montarResposta(mutante, res);</span>
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const invertArray = (arrayValor) =&gt; {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    const flipMatrix = matrix =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >      matrix[0].map((column, index) =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >        matrix.map(row =&gt; <span class="cstat-no" title="statement not covered" >row[index])</span></span>
+      ))
+    );
+    
+<span class="cstat-no" title="statement not covered" >    return flipMatrix(arrayValor.reverse());</span>
+&nbsp;
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  const verificaVertical = (dna, seq, mutante, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    let valVertical = montarMatriz(dna);</span>
+<span class="cstat-no" title="statement not covered" >    let inverte = invertArray(valVertical);</span>
+<span class="cstat-no" title="statement not covered" >    let newArray = [];</span>
+<span class="cstat-no" title="statement not covered" >    for (let i in inverte) {</span>
+<span class="cstat-no" title="statement not covered" >      let item = inverte[i];</span>
+<span class="cstat-no" title="statement not covered" >      item = item.join('');</span>
+<span class="cstat-no" title="statement not covered" >      newArray.push(item);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    let valVerticalFinal = verificaArray(newArray, seq);</span>
+<span class="cstat-no" title="statement not covered" >    mutante.push(valVerticalFinal);</span>
+<span class="cstat-no" title="statement not covered" >    verificaDiagonal(dna, seq, mutante, res);</span>
+  };
+  
+<span class="cstat-no" title="statement not covered" >  const verificaHorizontal = (dna, seq, res) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    let mutante = [];</span>
+<span class="cstat-no" title="statement not covered" >    let valHorizontal = verificaArray(dna, seq);</span>
+<span class="cstat-no" title="statement not covered" >    mutante.push(valHorizontal);</span>
+<span class="cstat-no" title="statement not covered" >    verificaVertical(dna, seq, mutante, res);</span>
+  };
+<span class="cstat-no" title="statement not covered" >  verificaHorizontal(dna_humano.dna, seq, res);</span>
+&nbsp;
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Sep 28 2018 07:34:02 GMT-0300 (-03)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
