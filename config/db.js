@@ -16,7 +16,7 @@ module.exports = () => {
       uristring =
         process.env.MONGOLAB_URI ||
         process.env.MONGOHQ_URL ||
-        'mongodb://mutant:Oi123456@ds115533.mlab.com:15533/heroku_0r11shnh';
+        'mongodb://mutant:br123456@ds115533.mlab.com:15533/heroku_0r11shnh';
     }
   mongoose.connect(uristring, { useMongoClient: true }, (err, res) => {
     if (err) {
