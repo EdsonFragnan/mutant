@@ -24,14 +24,14 @@ module.exports.isMutante = (dna_humano, res) => {
     });
   };
 
-  const verificaArray = (dna, seq) => {
+  const verificaArray = (dna) => {
     let mutante = false;
     for(let i in dna) {
       let _dna = dna[i],
-      new_seq_a = new RegExp(seq.seq_a),
-      new_seq_c = new RegExp(seq.seq_c),
-      new_seq_g = new RegExp(seq.seq_g),
-      new_seq_t = new RegExp(seq.seq_t);
+      new_seq_a = new RegExp(this._seq.seq_a),
+      new_seq_c = new RegExp(this._seq.seq_c),
+      new_seq_g = new RegExp(this._seq.seq_g),
+      new_seq_t = new RegExp(this._seq.seq_t);
       if (new_seq_a.test(_dna) === true ||
           new_seq_c.test(_dna) === true ||
           new_seq_g.test(_dna) === true ||
@@ -51,11 +51,11 @@ module.exports.isMutante = (dna_humano, res) => {
     return convertida;
   };
 
-  const montarResposta = (mutante, res) => {
+  const montarResposta = (res) => {
     let arrayFinal = [];
-    for (let i in mutante) {
-      if (mutante[i] === true) {
-        arrayFinal.push(mutante);
+    for (let i in this._mutante) {
+      if (this._mutante[i] === true) {
+        arrayFinal.push(this._mutante);
       }
     }
     if(arrayFinal.length >= 2) {
@@ -86,11 +86,11 @@ module.exports.isMutante = (dna_humano, res) => {
     return valor;
   };
 
-  const verificaDiagonal = (dna, seq, mutante, res) => {
-    let valDiagonal = montarArrayDiagonal(dna);
-    let valDiagonalFinal = verificaArray(valDiagonal, seq);
-    mutante.push(valDiagonalFinal);
-    montarResposta(mutante, res);
+  const verificaDiagonal = (res) => {
+    let valDiagonal = montarArrayDiagonal(this._dna);
+    let valDiagonalFinal = verificaArray(valDiagonal);
+    this._mutante.push(valDiagonalFinal);
+    montarResposta(res);
   };
 
   const invertArray = (arrayValor) => {
@@ -100,13 +100,11 @@ module.exports.isMutante = (dna_humano, res) => {
         matrix.map(row => row[index])
       ))
     );
-    
     return flipMatrix(arrayValor.reverse());
-
   };
 
-  const verificaVertical = (dna, seq, mutante, res) => {
-    let valVertical = montarMatriz(dna);
+  const verificaVertical = (res) => {
+    let valVertical = montarMatriz(this._dna);
     let inverte = invertArray(valVertical);
     let newArray = [];
     for (let i in inverte) {
@@ -114,17 +112,20 @@ module.exports.isMutante = (dna_humano, res) => {
       item = item.join('');
       newArray.push(item);
     }
-    let valVerticalFinal = verificaArray(newArray, seq);
-    mutante.push(valVerticalFinal);
-    verificaDiagonal(dna, seq, mutante, res);
+    let valVerticalFinal = verificaArray(newArray);
+    this._mutante.push(valVerticalFinal);
+    verificaDiagonal(res);
   };
   
-  const verificaHorizontal = (dna, seq, res) => {
-    let mutante = [];
-    let valHorizontal = verificaArray(dna, seq);
-    mutante.push(valHorizontal);
-    verificaVertical(dna, seq, mutante, res);
+  const verificaHorizontal = (res) => {
+    let valHorizontal = verificaArray(this._dna);
+    this._mutante.push(valHorizontal);
+    verificaVertical(res);
   };
-  verificaHorizontal(dna_humano.dna, seq, res);
+
+  this._dna = dna_humano.dna;
+  this._seq = seq;
+  this._mutante = [];
+  verificaHorizontal(res);
 
 };

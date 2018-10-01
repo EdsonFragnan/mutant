@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">98.63% </span>
+        <span class="strong">98.67% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>72/73</span>
+        <span class='fraction'>74/75</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">90% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">98.61% </span>
+        <span class="strong">98.65% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>71/72</span>
+        <span class='fraction'>73/74</span>
       </div>
     </div>
   </div>
@@ -173,7 +173,8 @@
 128
 129
 130
-131</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+131
+132</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">3×</span>
@@ -275,9 +276,7 @@
 <span class="cline-any cline-yes">108×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
@@ -298,8 +297,11 @@
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -329,14 +331,14 @@ module.exports.isMutante = (dna_humano, res) =&gt; {
     });
   };
 &nbsp;
-  const verificaArray = (dna, seq) =&gt; {
+  const verificaArray = (dna) =&gt; {
     let mutante = false;
     for(let i in dna) {
       let _dna = dna[i],
-      new_seq_a = new RegExp(seq.seq_a),
-      new_seq_c = new RegExp(seq.seq_c),
-      new_seq_g = new RegExp(seq.seq_g),
-      new_seq_t = new RegExp(seq.seq_t);
+      new_seq_a = new RegExp(this._seq.seq_a),
+      new_seq_c = new RegExp(this._seq.seq_c),
+      new_seq_g = new RegExp(this._seq.seq_g),
+      new_seq_t = new RegExp(this._seq.seq_t);
       if (new_seq_a.test(_dna) === true ||
           new_seq_c.test(_dna) === true ||
           new_seq_g.test(_dna) === true ||
@@ -356,11 +358,11 @@ module.exports.isMutante = (dna_humano, res) =&gt; {
     return convertida;
   };
 &nbsp;
-  const montarResposta = (mutante, res) =&gt; {
+  const montarResposta = (res) =&gt; {
     let arrayFinal = [];
-    for (let i in mutante) {
-      if (mutante[i] === true) {
-        arrayFinal.push(mutante);
+    for (let i in this._mutante) {
+      if (this._mutante[i] === true) {
+        arrayFinal.push(this._mutante);
       }
     }
     if(arrayFinal.length &gt;= 2) {
@@ -391,11 +393,11 @@ module.exports.isMutante = (dna_humano, res) =&gt; {
     return valor;
   };
 &nbsp;
-  const verificaDiagonal = (dna, seq, mutante, res) =&gt; {
-    let valDiagonal = montarArrayDiagonal(dna);
-    let valDiagonalFinal = verificaArray(valDiagonal, seq);
-    mutante.push(valDiagonalFinal);
-    montarResposta(mutante, res);
+  const verificaDiagonal = (res) =&gt; {
+    let valDiagonal = montarArrayDiagonal(this._dna);
+    let valDiagonalFinal = verificaArray(valDiagonal);
+    this._mutante.push(valDiagonalFinal);
+    montarResposta(res);
   };
 &nbsp;
   const invertArray = (arrayValor) =&gt; {
@@ -405,13 +407,11 @@ module.exports.isMutante = (dna_humano, res) =&gt; {
         matrix.map(row =&gt; row[index])
       ))
     );
-    
     return flipMatrix(arrayValor.reverse());
-&nbsp;
   };
 &nbsp;
-  const verificaVertical = (dna, seq, mutante, res) =&gt; {
-    let valVertical = montarMatriz(dna);
+  const verificaVertical = (res) =&gt; {
+    let valVertical = montarMatriz(this._dna);
     let inverte = invertArray(valVertical);
     let newArray = [];
     for (let i in inverte) {
@@ -419,18 +419,21 @@ module.exports.isMutante = (dna_humano, res) =&gt; {
       item = item.join('');
       newArray.push(item);
     }
-    let valVerticalFinal = verificaArray(newArray, seq);
-    mutante.push(valVerticalFinal);
-    verificaDiagonal(dna, seq, mutante, res);
+    let valVerticalFinal = verificaArray(newArray);
+    this._mutante.push(valVerticalFinal);
+    verificaDiagonal(res);
   };
   
-  const verificaHorizontal = (dna, seq, res) =&gt; {
-    let mutante = [];
-    let valHorizontal = verificaArray(dna, seq);
-    mutante.push(valHorizontal);
-    verificaVertical(dna, seq, mutante, res);
+  const verificaHorizontal = (res) =&gt; {
+    let valHorizontal = verificaArray(this._dna);
+    this._mutante.push(valHorizontal);
+    verificaVertical(res);
   };
-  verificaHorizontal(dna_humano.dna, seq, res);
+&nbsp;
+  this._dna = dna_humano.dna;
+  this._seq = seq;
+  this._mutante = [];
+  verificaHorizontal(res);
 &nbsp;
 };
 &nbsp;</pre></td></tr>
@@ -439,7 +442,7 @@ module.exports.isMutante = (dna_humano, res) =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Sep 28 2018 10:18:13 GMT-0300 (-03)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Oct 01 2018 00:32:34 GMT-0300 (-03)
 </div>
 </div>
 <script src="../prettify.js"></script>
