@@ -1,33 +1,33 @@
 'use strict';
 
 module.exports.validation = (body, callback) => {
-    if (!body || !body.dna) {
-        callback({mensagem: 'Body de envio inválido!'}, null);
+    if (!body || !body.adn) {
+        callback({message: 'Invalid shipping body!'}, null);
     } else {
-        let dna = body.dna;
-        let objeto = [];
-        let montaErro = false;
-        for(let i in dna) {
-            let letra = dna[i];
-            for(let k in letra) {
+        let adn = body.adn;
+        let object = [];
+        let error_mount = false;
+        for(let i in adn) {
+            let letter = adn[i];
+            for(let k in letter) {
                 if(
-                    letra[k].toUpperCase() != 'A' &&
-                    letra[k].toUpperCase() != 'C' &&
-                    letra[k].toUpperCase() != 'G' &&
-                    letra[k].toUpperCase() != 'T'
+                    letter[k].toUpperCase() != 'A' &&
+                    letter[k].toUpperCase() != 'C' &&
+                    letter[k].toUpperCase() != 'G' &&
+                    letter[k].toUpperCase() != 'T'
                 ) {
-                    montaErro = true;
+                    error_mount = true;
                 }
             } 
         }
-        for(let k in dna) {
-            objeto.push(dna[k].toUpperCase());
+        for(let k in adn) {
+            object.push(adn[k].toUpperCase());
         }
-        if(montaErro === true) {
-            callback({mensagem:'Código DNA inválido!'}, null);
+        if(error_mount === true) {
+            callback({message:'Invalid adn code!'}, null);
         } else {
             let result = {
-                dna: objeto
+                adn: object
             };
             callback(null, result); 
         }

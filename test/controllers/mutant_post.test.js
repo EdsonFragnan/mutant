@@ -1,8 +1,8 @@
 'use strict';
 
 const assert = require('assert');
-const controller = require('../../controllers/mutante_post.js');
-let mutante = [];
+const controller = require('../../controllers/mutant_post.js');
+let mutant = [];
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const db = require('../../config/db.js');
@@ -16,9 +16,9 @@ describe('Test controller post DNA', (done) => {
       done();
     });
 
-    it('01 - Humano', () => {
-      const envio = {
-        'dna': [
+    it('01 - Human', () => {
+      const send = {
+        'adn': [
           'ATGCGA',
           'CAGTGC',
           'TTATGT',
@@ -27,7 +27,7 @@ describe('Test controller post DNA', (done) => {
           'TCACTG'
         ]
       };
-      const isMutante = false;
+      const resp = false;
       const res = {
         sendStatus: (responseStatus) => {
           return responseStatus;
@@ -36,17 +36,17 @@ describe('Test controller post DNA', (done) => {
           return;
         }
       };
-      controller.isMutante(envio, res, () => {
-        mutante.postMutante(isMutante, (err, data) => {
+      controller.isMutant(send, res, () => {
+        mutant.postMutant(resp, (err, data) => {
           assert.equal(res.sendStatus, 403);
           done();
         });
       });
     });
 
-    it('02- Mutante', () => {
-      const envio = {
-        'dna': [
+    it('02- Mutant', () => {
+      const send = {
+        'adn': [
           'ATGCGA',
           'CAGTGC',
           'TTATGT',
@@ -55,8 +55,7 @@ describe('Test controller post DNA', (done) => {
           'TCACTG'
         ]
       };
-      const isMutante = true;
-      const dna = true;
+      const adn = true;
       let res = {
         sendStatus: (responseStatus) => {
           return responseStatus;
@@ -65,8 +64,8 @@ describe('Test controller post DNA', (done) => {
           return responseMessage;
         }
       };
-      controller.isMutante(envio, res, () => {
-        mutante.postMutante(isMutante, (err, data) => {
+      controller.isMutant(send, res, () => {
+        mutant.postMutant(adn, (err, data) => {
           assert.equal(res.sendStatus, 200);
           done();
         });
@@ -81,9 +80,9 @@ describe('Test controller post DNA', (done) => {
       done();
     });
 
-    it('01 - Erro', () => {
-      const envio = {
-        'dna':[
+    it('01 - Err', () => {
+      const send = {
+        'adn':[
           'ATGCGA',
           'CAGTGC',
           'TTATGT',
@@ -92,7 +91,7 @@ describe('Test controller post DNA', (done) => {
           'TCACTG'
         ]
       };
-      const isMutante = false;
+      const adn = false;
       const res = {
         sendStatus: (responseStatus) => {
           return responseStatus;
@@ -101,10 +100,9 @@ describe('Test controller post DNA', (done) => {
           return responseMessage;
         }
       };
-      const erro = {message: 'Erro ao cadastrar.'};
 
-      controller.isMutante(envio, res, () => {
-        mutante.postMutante(isMutante, (err) => {
+      controller.isMutant(send, res, () => {
+        mutant.postMutant(adn, (err) => {
           assert.equal(res.sendStatus, 503);
           done();
         });

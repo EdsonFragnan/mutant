@@ -3,43 +3,43 @@
 const assert = require('assert');
 const validation = require('../../validation/validation.js');
 
-describe('Testes de validação.', (done) => {
+describe('Validation test.', (done) => {
   
   after(function () {
     process.exit(0);
   });
 
   const body = {
-    "dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CACCTA","TCACTG"]
+    "adn":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CACCTA","TCACTG"]
   };
 
-  const mensagemBody = 'Body de envio inválido!',
-        mensagemDNA = 'Código DNA inválido!';
+  const message_body = 'Invalid shipping body!',
+        message_adn = 'Invalid adn code!';
 
-  it('Body inválido.', (done) => {
-    const envio = null;
-    validation.validation(envio, (err, data) => {
-      assert.equal(err.mensagem, mensagemBody);
+  it('Invalid body.', (done) => {
+    const send = null;
+    validation.validation(send, (err, data) => {
+      assert.equal(err.message, message_body);
       done();
     });
   });
 
-  it('DNA inválido.', (done) => {
-    const envio = {
-      "dna":["FFFFFF","CAGTGC","TTATGT","AGAAGG","CACCTA","TCACTG"]
+  it('Invalid adn.', (done) => {
+    const send = {
+      "adn":["FFFFFF","CAGTGC","TTATGT","AGAAGG","CACCTA","TCACTG"]
     };
-    validation.validation(envio, (err, data) => {
-      assert.equal(err.mensagem, mensagemDNA);
+    validation.validation(send, (err, data) => {
+      assert.equal(err.message, message_adn);
       done();
     });
   });
 
-  it('DNA Sucesso.', (done) => {
-    const sucesso = {
-      "dna":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CACCTA","TCACTG"]
+  it('ADN Success.', (done) => {
+    const success = {
+      "adn":["ATGCGA","CAGTGC","TTATGT","AGAAGG","CACCTA","TCACTG"]
     };
     validation.validation(body, (err, result) => {
-      assert.equal(result.length, sucesso.length);
+      assert.equal(result.length, success.length);
       done();
     });
   });

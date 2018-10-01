@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for config/db.js</title>
+    <title>Code coverage report for models/mutant.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,18 +16,18 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">all files</a> / <a href="index.html">config/</a> db.js
+      <a href="../index.html">all files</a> / <a href="index.html">models/</a> mutant.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">81.82% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>9/11</span>
+        <span class='fraction'>13/13</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">58.33% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>7/12</span>
+        <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">81.82% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/11</span>
+        <span class='fraction'>13/13</span>
       </div>
     </div>
   </div>
@@ -70,60 +70,96 @@
 25
 26
 27
-28</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
-module.exports = () =&gt; {
-  const mongoose = require('mongoose');
-  mongoose.Promise = require('bluebird');
+const mongoose = require('mongoose'),
+      Schema = mongoose.Schema;
+let post_mutant = new Schema({
+  isMutant: {
+    type: Boolean,
+    required: true,
+  }
+}),
+mutant = mongoose.model('mutant', post_mutant);
 &nbsp;
-  let uristring = '',
-    port = process.env.PORT || 3000;
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (port === 3000) {
-      uristring =
-        process.env.MONGOLAB_URI ||
-        process.env.MONGOHQ_URL ||
-        'mongodb://127.0.0.1:27017/mutant';
-    } else {
-<span class="cstat-no" title="statement not covered" >      uristring =</span>
-        process.env.MONGOLAB_URI ||
-        process.env.MONGOHQ_URL ||
-        'mongodb://mutant:mutant123456@ds115533.mlab.com:15533/heroku_0r11shnh';
-    }
-  mongoose.connect(uristring, { useMongoClient: true }, (err, res) =&gt; {
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
-<span class="cstat-no" title="statement not covered" >      console.log('Bad Connection: working in - ' + uristring + '. ' + err);</span>
-    } else {
-      console.log('Connection Success: working in - ' + uristring);
-    }
-  });
-};
+module.exports = {
+&nbsp;
+  getAll: (callback) =&gt; {
+    mutant.find((error, data) =&gt; {
+      if (error) {
+        callback(error, null)
+      } else {
+        callback(null, data)
+      }
+    });
+  },
+&nbsp;
+  postMutant: (request, callback) =&gt; {
+    let send = {
+      isMutant: request
+    };
+    let insert_mutant = new mutant(send);
+    insert_mutant.save(send, (error, data) =&gt; {
+      if (error) {
+        callback(erro, null);
+      } else {
+        callback(null, data);
+      }
+    });
+  }
+&nbsp;
+}
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

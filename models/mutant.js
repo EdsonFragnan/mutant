@@ -2,18 +2,18 @@
 
 const mongoose = require('mongoose'),
       Schema = mongoose.Schema;
-let post_mutante = new Schema({
-  isMutante: {
+let post_mutant = new Schema({
+  isMutant: {
     type: Boolean,
     required: true,
   }
 }),
-mutante = mongoose.model('mutante', post_mutante);
+mutant = mongoose.model('mutant', post_mutant);
 
 module.exports = {
 
   getAll: (callback) => {
-    mutante.find((error, data) => {
+    mutant.find((error, data) => {
       if (error) {
         callback(error, null)
       } else {
@@ -22,12 +22,12 @@ module.exports = {
     });
   },
 
-  postMutante: (request, callback) => {
-    let envio = {
-      isMutante: request
+  postMutant: (request, callback) => {
+    let send = {
+      isMutant: request
     };
-    let insert_mutante = new mutante(envio);
-    insert_mutante.save(envio, (error, data) => {
+    let insert_mutant = new mutant(send);
+    insert_mutant.save(send, (error, data) => {
       if (error) {
         callback(erro, null);
       } else {
