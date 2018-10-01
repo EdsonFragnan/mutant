@@ -1,6 +1,6 @@
 # mutant
 
-Aplicação rodando na rota da AWS.
+Aplicação rodando no Heroku.
 
 # Testes Unitários + Coverage
 - Observação - Para rodar os teste unitários, precisa subir uma instância do mongoDB
@@ -21,7 +21,7 @@ Aplicação rodando na rota da AWS.
 * Resposta "Forbidden"
 - Body
 {
-	"dna":["ATGCGA",
+	"adn":["ATGCGA",
           "CAGTGC",
           "TTCCCT",
           "AGAAGG",
@@ -31,7 +31,7 @@ Aplicação rodando na rota da AWS.
 * Resposta "OK"
 - Body
 {
-	"dna":["ATGCGA",
+	"adn":["ATGCGA",
           "CAGTGC",
           "TTATGT",
           "AGAAGG",
