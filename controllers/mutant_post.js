@@ -1,7 +1,7 @@
 'use strict';
+const mutant_model = require('../models/mutant.js');
 
 module.exports.isMutant = (adn_human, res) => {
-  const mutant_model = require('../models/mutant.js');
 
   const seq = {
     seq_a: 'AAAA',
@@ -26,7 +26,7 @@ module.exports.isMutant = (adn_human, res) => {
 
   const checkArray = (adn) => {
     let mutant = false;
-    adn.map(row => {
+    adn.forEach(row => {
       let new_seq_a = new RegExp(this._seq.seq_a),
       new_seq_c = new RegExp(this._seq.seq_c),
       new_seq_g = new RegExp(this._seq.seq_g),
@@ -106,7 +106,7 @@ module.exports.isMutant = (adn_human, res) => {
     let value_vertical = mountArray(this._adn);
     let reverse_array = invertArray(value_vertical);
     let new_array = [];
-    reverse_array.map(row => {
+    reverse_array.forEach(row => {
       let item = row;
       item = item.join('');
       new_array.push(item);

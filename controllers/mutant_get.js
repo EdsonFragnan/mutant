@@ -1,13 +1,16 @@
 'use strict';
 
+const mutant_model = require('../models/mutant.js');
+
 module.exports.isMutant = (res) => {
-    const mutant_model = require('../models/mutant.js');
 
     const treatsDivision = (mutant, human) => {
         if (mutant === 0 && human === 0) {
             return 0;
-        } else if (mutant > 0 && human === 0 || mutant === 0 && human > 0) {
-            return 0;
+        } else if (mutant > 0 && human === 0) {
+            return mutant;
+        } else if (mutant === 0 && human > 0) {
+            return human;
         }
         return (mutant/human).toFixed(2);
     };
@@ -15,7 +18,7 @@ module.exports.isMutant = (res) => {
     const treatsResponse = (data) => {
         let mutant = [];
         let human = [];
-        data.map(row => {
+        data.forEach(row => {
             if (row.isMutant === true) {
                 mutant.push(row.isMutant);
             } else {
