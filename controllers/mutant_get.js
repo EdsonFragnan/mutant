@@ -35,16 +35,23 @@ module.exports.isMutant = (res) => {
         return response;
     };
 
-    const calledModel = (res) => {
-        mutant_model.getAll((err, data) => {
-            if (err) {
-                res.sendStatus(503);
-            } else {
-                let resp = treatsResponse(data);  
-                res.json(resp);
-            }
+    const calledModel = () => {
+        return new Promise((resolve, reject) => {
+            mutant_model.getAll((err, data) => {
+                if (err) {
+                    reject();
+                } else {
+                    let resp = treatsResponse(data);  
+                    resolve(resp);
+                }
+            });
         });
     }
 
-    calledModel(res);    
+
+    calledModel().then((result) => {
+        res.json(result);
+    }, (err) => {
+        res.sendStatus(503);
+    });    
 };

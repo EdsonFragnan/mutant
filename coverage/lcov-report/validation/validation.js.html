@@ -22,7 +22,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>17/17</span>
+        <span class='fraction'>22/22</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>17/17</span>
+        <span class='fraction'>22/22</span>
       </div>
     </div>
   </div>
@@ -78,9 +78,25 @@
 33
 34
 35
-36</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -100,53 +116,76 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">12×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
 module.exports.validation = (body, callback) =&gt; {
-    if (!body || !body.adn) {
-        callback({message: 'Invalid shipping body!'}, null);
-    } else {
-        let adn = body.adn;
-        let object = [];
-        let error_mount = false;
-        for(let i in adn) {
-            let letter = adn[i];
-            for(let k in letter) {
-                if(
-                    letter[k].toUpperCase() != 'A' &amp;&amp;
-                    letter[k].toUpperCase() != 'C' &amp;&amp;
-                    letter[k].toUpperCase() != 'G' &amp;&amp;
-                    letter[k].toUpperCase() != 'T'
-                ) {
-                    error_mount = true;
+&nbsp;
+    const validation_body = (body) =&gt; {
+        return new Promise((resolve, reject) =&gt; {
+            if (!body || !body.adn) {
+                reject({message: 'Invalid shipping body!'});
+            } else {
+                let adn = body.adn;
+                let object = [];
+                let error_mount = false;
+                adn.forEach(row =&gt; {
+                    let letter = row;
+                    for(let k in letter) {
+                        if(
+                            letter[k].toUpperCase() != 'A' &amp;&amp;
+                            letter[k].toUpperCase() != 'C' &amp;&amp;
+                            letter[k].toUpperCase() != 'G' &amp;&amp;
+                            letter[k].toUpperCase() != 'T'
+                        ) {
+                            error_mount = true;
+                        }
+                    } 
+                });
+        
+                if(error_mount === true) {
+                    reject({message:'Invalid adn code!'});
+                } else {
+                    adn.forEach(newRow =&gt; {
+                        object.push(newRow.toUpperCase());
+                    });
+                    let result = {
+                        adn: object
+                    };
+                    resolve(result); 
                 }
-            } 
-        }
-        for(let k in adn) {
-            object.push(adn[k].toUpperCase());
-        }
-        if(error_mount === true) {
-            callback({message:'Invalid adn code!'}, null);
-        } else {
-            let result = {
-                adn: object
-            };
-            callback(null, result); 
-        }
-    }
+            }
+        });
+    };
+&nbsp;
+    validation_body(body).then((result) =&gt; {
+        callback(null, result);
+    }, (err) =&gt; {
+        callback(err, null);
+    });
+&nbsp;
 };
 &nbsp;</pre></td></tr>
 </table></pre>
@@ -154,7 +193,7 @@ module.exports.validation = (body, callback) =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Oct 01 2018 18:57:05 GMT-0300 (-03)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 00:41:25 GMT-0300 (-03)
 </div>
 </div>
 <script src="../prettify.js"></script>
