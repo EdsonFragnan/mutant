@@ -10,13 +10,13 @@ module.exports.isMutant = (adn_human, res) => {
     seq_t: 'TTTT'
   };
 
-  const insertMutant = (adn) => {
+  const insertMutant = (_adn) => {
     return new Promise((resolve, reject) => {
-      mutant_model.postMutant(adn, (err, data) => {
+      mutant_model.postMutant(_adn, (err, data) => {
         if (err) {
           reject({status: 503});
         } else {
-          if (adn === false) {
+          if (_adn === false) {
             reject({status: 403});
           } else {
             resolve();
@@ -26,13 +26,13 @@ module.exports.isMutant = (adn_human, res) => {
     }); 
   };
 
-  const checkArray = (adn) => {
+  const checkArray = (_adn, _seq) => {
     let mutant = false;
-    adn.forEach(row => {
-      let new_seq_a = new RegExp(this._seq.seq_a),
-      new_seq_c = new RegExp(this._seq.seq_c),
-      new_seq_g = new RegExp(this._seq.seq_g),
-      new_seq_t = new RegExp(this._seq.seq_t);
+    _adn.forEach(row => {
+      let new_seq_a = new RegExp(_seq.seq_a),
+      new_seq_c = new RegExp(_seq.seq_c),
+      new_seq_g = new RegExp(_seq.seq_g),
+      new_seq_t = new RegExp(_seq.seq_t);
       if (new_seq_a.test(row) === true ||
           new_seq_c.test(row) === true ||
           new_seq_g.test(row) === true ||
@@ -43,8 +43,8 @@ module.exports.isMutant = (adn_human, res) => {
     return mutant;
   };
 
-  const mountArray = (adn) => {
-    const converted = adn.map((obj) => {
+  const mountArray = (_adn) => {
+    const converted = _adn.map((obj) => {
       return Object.keys(obj).map((key) => {
           return obj[key];
       });
@@ -52,10 +52,10 @@ module.exports.isMutant = (adn_human, res) => {
     return converted;
   };
 
-  const mountResponse = () => {
+  const mountResponse = (_adns) => {
     return new Promise((resolve) => {
       let final_array = [];
-      this._mutant.filter(row => {
+      _adns.filter(row => {
         if (row === true) {
           final_array.push(row);
         }
@@ -68,9 +68,9 @@ module.exports.isMutant = (adn_human, res) => {
     });
   };
 
-  const mountDiagonalArray = (adn) => {
-    let y_length = adn.length;
-    let x_length = adn[0].length;
+  const mountDiagonalArray = (_adn) => {
+    let y_length = _adn.length;
+    let x_length = _adn[0].length;
     let max_length = Math.max(x_length, y_length);
     let temp;
     let value = [];
@@ -79,7 +79,7 @@ module.exports.isMutant = (adn_human, res) => {
         for (let y = y_length - 1; y >= 0; --y) {
             let x = k - y;
             if (x >= 0 && x < x_length) {
-                temp.push(adn[y][x]);
+                temp.push(_adn[y][x]);
             }
         }
         if(temp.length > 0) {
@@ -89,12 +89,11 @@ module.exports.isMutant = (adn_human, res) => {
     return value;
   };
 
-  const diagonalCheck = () => {
+  const diagonalCheck = (_adn, _seq) => {
     return new Promise((resolve) => {
-      let diagonal_value = mountDiagonalArray(this._adn);
-      let final_diagonal_value = checkArray(diagonal_value);
-      this._mutant.push(final_diagonal_value);
-      resolve();
+      let diagonal_value = mountDiagonalArray(_adn);
+      let final_diagonal_value = checkArray(diagonal_value, _seq);
+      resolve(final_diagonal_value);
     });
   };
 
@@ -108,9 +107,9 @@ module.exports.isMutant = (adn_human, res) => {
     return flipMatrix(array_value.reverse());
   };
 
-  const verticalCheck = () => {
+  const verticalCheck = (_adn, _seq) => {
     return new Promise((resolve) => {
-      let value_vertical = mountArray(this._adn);
+      let value_vertical = mountArray(_adn);
       let reverse_array = invertArray(value_vertical);
       let new_array = [];
       reverse_array.forEach(row => {
@@ -118,36 +117,36 @@ module.exports.isMutant = (adn_human, res) => {
         item = item.join('');
         new_array.push(item);
       });
-      let final_vertical_value = checkArray(new_array);
-      this._mutant.push(final_vertical_value);
-      resolve();
+      let final_vertical_value = checkArray(new_array, _seq);
+      resolve(final_vertical_value);
     });
   };
   
-  const horizontalCheck = () => {
+  const horizontalCheck = (_adn, _seq) => {
     return new Promise((resolve) => {
-      let value_horizontal = checkArray(this._adn);
-      this._mutant.push(value_horizontal);
-      resolve();
+      let value_horizontal = checkArray(_adn, _seq);
+      resolve(value_horizontal);
     });
   };
 
-  this._adn = adn_human.adn;
-  this._seq = seq;
-  this._mutant = [];
+  const promises = [
+    horizontalCheck(adn_human.adn, seq), 
+    verticalCheck(adn_human.adn, seq), 
+    diagonalCheck(adn_human.adn, seq)
+  ];
 
-  horizontalCheck()
-    .then(() => verticalCheck())
-    .then(() => diagonalCheck())
-    .then(() => mountResponse())
-    .then((data) => insertMutant(data))
+  Promise
+    .all(promises)
     .then(result => {
-      res.json();
-    }, (err) => {
-      res.sendStatus(err.status);
-    }); 
+      mountResponse(result)
+        .then((data) => insertMutant(data))
+        .then(response => {
+          res.json();
+        }, (err) => {
+          res.sendStatus(err.status);
+        });
+    })
+    .catch(error => {
+      res.sendStatus(503);
+    });
 };
-
-
-
-

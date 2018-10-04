@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">98.84% </span>
+        <span class="strong">97.5% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>85/86</span>
+        <span class='fraction'>78/80</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">90% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">98.82% </span>
+        <span class="strong">97.47% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>84/85</span>
+        <span class='fraction'>77/79</span>
       </div>
     </div>
   </div>
@@ -194,9 +194,7 @@
 149
 150
 151
-152
-153
-154</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+152</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
@@ -292,7 +290,6 @@
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -318,7 +315,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -326,17 +322,18 @@
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -346,8 +343,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 const mutant_model = require('../models/mutant.js');
@@ -361,13 +357,13 @@ module.exports.isMutant = (adn_human, res) =&gt; {
     seq_t: 'TTTT'
   };
 &nbsp;
-  const insertMutant = (adn) =&gt; {
+  const insertMutant = (_adn) =&gt; {
     return new Promise((resolve, reject) =&gt; {
-      mutant_model.postMutant(adn, (err, data) =&gt; {
+      mutant_model.postMutant(_adn, (err, data) =&gt; {
         <span class="missing-if-branch" title="if path not taken" >I</span>if (err) {
 <span class="cstat-no" title="statement not covered" >          reject({status: 503});</span>
         } else {
-          if (adn === false) {
+          if (_adn === false) {
             reject({status: 403});
           } else {
             resolve();
@@ -377,13 +373,13 @@ module.exports.isMutant = (adn_human, res) =&gt; {
     }); 
   };
 &nbsp;
-  const checkArray = (adn) =&gt; {
+  const checkArray = (_adn, _seq) =&gt; {
     let mutant = false;
-    adn.forEach(row =&gt; {
-      let new_seq_a = new RegExp(this._seq.seq_a),
-      new_seq_c = new RegExp(this._seq.seq_c),
-      new_seq_g = new RegExp(this._seq.seq_g),
-      new_seq_t = new RegExp(this._seq.seq_t);
+    _adn.forEach(row =&gt; {
+      let new_seq_a = new RegExp(_seq.seq_a),
+      new_seq_c = new RegExp(_seq.seq_c),
+      new_seq_g = new RegExp(_seq.seq_g),
+      new_seq_t = new RegExp(_seq.seq_t);
       if (new_seq_a.test(row) === true ||
           new_seq_c.test(row) === true ||
           new_seq_g.test(row) === true ||
@@ -394,8 +390,8 @@ module.exports.isMutant = (adn_human, res) =&gt; {
     return mutant;
   };
 &nbsp;
-  const mountArray = (adn) =&gt; {
-    const converted = adn.map((obj) =&gt; {
+  const mountArray = (_adn) =&gt; {
+    const converted = _adn.map((obj) =&gt; {
       return Object.keys(obj).map((key) =&gt; {
           return obj[key];
       });
@@ -403,10 +399,10 @@ module.exports.isMutant = (adn_human, res) =&gt; {
     return converted;
   };
 &nbsp;
-  const mountResponse = () =&gt; {
+  const mountResponse = (_adns) =&gt; {
     return new Promise((resolve) =&gt; {
       let final_array = [];
-      this._mutant.filter(row =&gt; {
+      _adns.filter(row =&gt; {
         if (row === true) {
           final_array.push(row);
         }
@@ -419,9 +415,9 @@ module.exports.isMutant = (adn_human, res) =&gt; {
     });
   };
 &nbsp;
-  const mountDiagonalArray = (adn) =&gt; {
-    let y_length = adn.length;
-    let x_length = adn[0].length;
+  const mountDiagonalArray = (_adn) =&gt; {
+    let y_length = _adn.length;
+    let x_length = _adn[0].length;
     let max_length = Math.max(x_length, y_length);
     let temp;
     let value = [];
@@ -430,7 +426,7 @@ module.exports.isMutant = (adn_human, res) =&gt; {
         for (let y = y_length - 1; y &gt;= 0; --y) {
             let x = k - y;
             if (x &gt;= 0 &amp;&amp; x &lt; x_length) {
-                temp.push(adn[y][x]);
+                temp.push(_adn[y][x]);
             }
         }
         <span class="missing-if-branch" title="else path not taken" >E</span>if(temp.length &gt; 0) {
@@ -440,12 +436,11 @@ module.exports.isMutant = (adn_human, res) =&gt; {
     return value;
   };
 &nbsp;
-  const diagonalCheck = () =&gt; {
+  const diagonalCheck = (_adn, _seq) =&gt; {
     return new Promise((resolve) =&gt; {
-      let diagonal_value = mountDiagonalArray(this._adn);
-      let final_diagonal_value = checkArray(diagonal_value);
-      this._mutant.push(final_diagonal_value);
-      resolve();
+      let diagonal_value = mountDiagonalArray(_adn);
+      let final_diagonal_value = checkArray(diagonal_value, _seq);
+      resolve(final_diagonal_value);
     });
   };
 &nbsp;
@@ -459,9 +454,9 @@ module.exports.isMutant = (adn_human, res) =&gt; {
     return flipMatrix(array_value.reverse());
   };
 &nbsp;
-  const verticalCheck = () =&gt; {
+  const verticalCheck = (_adn, _seq) =&gt; {
     return new Promise((resolve) =&gt; {
-      let value_vertical = mountArray(this._adn);
+      let value_vertical = mountArray(_adn);
       let reverse_array = invertArray(value_vertical);
       let new_array = [];
       reverse_array.forEach(row =&gt; {
@@ -469,46 +464,45 @@ module.exports.isMutant = (adn_human, res) =&gt; {
         item = item.join('');
         new_array.push(item);
       });
-      let final_vertical_value = checkArray(new_array);
-      this._mutant.push(final_vertical_value);
-      resolve();
+      let final_vertical_value = checkArray(new_array, _seq);
+      resolve(final_vertical_value);
     });
   };
   
-  const horizontalCheck = () =&gt; {
+  const horizontalCheck = (_adn, _seq) =&gt; {
     return new Promise((resolve) =&gt; {
-      let value_horizontal = checkArray(this._adn);
-      this._mutant.push(value_horizontal);
-      resolve();
+      let value_horizontal = checkArray(_adn, _seq);
+      resolve(value_horizontal);
     });
   };
 &nbsp;
-  this._adn = adn_human.adn;
-  this._seq = seq;
-  this._mutant = [];
+  const promises = [
+    horizontalCheck(adn_human.adn, seq), 
+    verticalCheck(adn_human.adn, seq), 
+    diagonalCheck(adn_human.adn, seq)
+  ];
 &nbsp;
-  horizontalCheck()
-    .then(() =&gt; verticalCheck())
-    .then(() =&gt; diagonalCheck())
-    .then(() =&gt; mountResponse())
-    .then((data) =&gt; insertMutant(data))
+  Promise
+    .all(promises)
     .then(result =&gt; {
-      res.json();
-    }, (err) =&gt; {
-      res.sendStatus(err.status);
-    }); 
-};
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;</pre></td></tr>
+      mountResponse(result)
+        .then((data) =&gt; insertMutant(data))
+        .then(response =&gt; {
+          res.json();
+        }, (err) =&gt; {
+          res.sendStatus(err.status);
+        });
+    })
+    .catch(error =&gt; {
+<span class="cstat-no" title="statement not covered" >      res.sendStatus(503);</span>
+    });
+};</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Oct 02 2018 00:41:25 GMT-0300 (-03)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 04 2018 01:15:38 GMT-0300 (-03)
 </div>
 </div>
 <script src="../prettify.js"></script>
